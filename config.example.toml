@@ -1,0 +1,39 @@
+[camera]
+camera_id = "gym_cam_1"
+# Keep credentials out of this file; set CAMERA_RTSP_URL in the env file.
+rtsp_url = "${CAMERA_RTSP_URL}"
+
+[capture]
+interval_seconds = 30
+rtsp_transport = "tcp"            # "tcp" or "udp"
+ffmpeg_stimeout_us = 7000000      # 7 seconds
+jpeg_quality = 2                  # 2 is high quality; larger is more compression
+scale_width = 0                   # 0 disables scaling; set to e.g. 1280 to downscale
+
+[operating_hours]
+timezone = "America/New_York"
+start = "06:00"
+end = "22:00"
+days = ["mon","tue","wed","thu","fri","sat","sun"]
+
+[spool]
+root_dir = "/var/lib/camera-pipeline"
+max_pending_files = 20000
+max_pending_gb = 10
+delete_after_success = true
+
+[supabase]
+# Keep secrets out of this file; set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in the env file.
+url = "${SUPABASE_URL}"
+service_role_key = "${SUPABASE_SERVICE_ROLE_KEY}"
+
+bucket = "camera-stills"
+table = "camera_stills"
+
+# Storage path convention
+prefix = "stills"
+partition_timezone = "local"     # "local" or "utc"
+
+# If a duplicate capture slot is retried, allow overwriting the same object key.
+storage_upsert = true
+cache_control_seconds = 3600

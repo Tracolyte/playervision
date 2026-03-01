@@ -1,0 +1,27 @@
+[Unit]
+Description=Camera still capture pipeline (RTSP -> Supabase Storage -> Postgres)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=camera-pipeline
+Group=camera-pipeline
+
+EnvironmentFile=/etc/camera-pipeline/camera-pipeline.env
+ExecStart=/opt/camera-pipeline/venv/bin/python -m camera_pipeline.main --config /etc/camera-pipeline/config.toml
+
+WorkingDirectory=/opt/camera-pipeline
+Restart=on-failure
+RestartSec=5
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/camera-pipeline
+ReadOnlyPaths=/etc/camera-pipeline
+
+[Install]
+WantedBy=multi-user.target
