@@ -358,3 +358,13 @@ These are not implemented yet but the architecture supports them:
 - **On-device inference:** Add a job runner that reads from the DB, downloads/reads the still, runs a model, writes results back.
 - **Multi-camera:** Add more `[camera]` sections or run multiple service instances with different config files.
 - **Admin UI:** Generate signed URLs server-side for viewing private bucket images (`create_signed_url` in Supabase SDK).
+
+## Next Steps to Run Service
+
+To run as a service:
+
+`sudo cp /opt/camera-pipeline/deploy/camera-pipeline.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo systemctl enable --now camera-pipeline
+journalctl -u camera-pipeline -f
+`
