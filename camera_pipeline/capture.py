@@ -40,7 +40,7 @@ def _run_ffmpeg_grab(
         "-hide_banner",
         "-loglevel", "error",
         "-rtsp_transport", rtsp_transport,
-        "-stimeout", str(stimeout_us),
+        "-timeout", str(stimeout_us),
         "-i", rtsp_url,
         "-an",
         "-frames:v", "1",

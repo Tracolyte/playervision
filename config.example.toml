@@ -12,8 +12,8 @@ scale_width = 0                   # 0 disables scaling; set to e.g. 1280 to down
 
 [operating_hours]
 timezone = "America/New_York"
-start = "06:00"
-end = "22:00"
+start = "00:00"
+end = "23:59"
 days = ["mon","tue","wed","thu","fri","sat","sun"]
 
 [spool]
